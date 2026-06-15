@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arun S — Developer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --bg: #080d14;
+  --surface: #0d1521;
+  --card: #101c2e;
+  --border: rgba(110,231,183,0.08);
+  --accent: #6ee7b7;
+  --accent2: #7c6af5;
+  --muted: #7a8fa6;
+  --text: #ddeaf6;
+  --maxw: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap { max-width: var(--maxw); margin: auto; padding: 28px 20px; position: relative; z-index: 1; }
+
+/* ── NAV ── */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand { display: flex; align-items: center; gap: 14px; }
+
+.avatar {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 18px rgba(110,231,183,0.2);
+}
+
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.brand-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; }
+.brand-role { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+  align-items: center;
+  margin-top: 56px;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+h1 .dim { color: var(--muted); font-weight: 400; }
+
+.lead {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 15px;
+  max-width: 520px;
+}
+
+.hero-btns { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary { background: var(--accent); color: #080d14; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(110,231,183,0.3); }
+.btn-ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn-ghost:hover { background: rgba(110,231,183,0.07); transform: translateY(-2px); }
+
+/* ── STAT CARD ── */
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stat-row { display: flex; flex-direction: column; gap: 2px; }
+.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.stat-val { font-size: 14px; font-weight: 600; }
+
+.stat-divider { height: 1px; background: var(--border); }
+
+/* ── SECTION HEADERS ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  margin-top: 48px;
+}
+
+.section-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(110,231,183,0.08);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  transition: 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.project-card:hover { transform: translateY(-4px); border-color: rgba(110,231,183,0.2); }
+.project-card:hover::before { opacity: 1; }
+
+.project-card.featured { border-color: rgba(110,231,183,0.25); }
+.project-card.featured::before { opacity: 1; }
+
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.project-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.project-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(110,231,183,0.12);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.project-badge.purple {
+  background: rgba(124,106,245,0.12);
+  color: var(--accent2);
+}
+
+.project-desc {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.project-stat {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  color: var(--muted);
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: 12px;
+  transition: gap 0.2s;
+}
+.project-link:hover { gap: 8px; }
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.skill-group {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.skill-group-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.pill.accent-pill {
+  background: rgba(110,231,183,0.08);
+  border-color: rgba(110,231,183,0.2);
+  color: var(--accent);
+}
+
+/* ── EXPERIENCE ── */
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.exp-item:last-child { border-bottom: none; }
+
+.exp-when {
+  font-size: 12px;
+  color: var(--muted);
+  padding-top: 3px;
+  font-weight: 600;
+}
+
+.exp-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.exp-desc { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+/* ── ABOUT + CONTACT ROW ── */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.about-text { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+.contact-row { display: flex; flex-direction: column; gap: 12px; }
+.contact-item { display: flex; flex-direction: column; gap: 2px; }
+.contact-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.contact-val { font-size: 14px; font-weight: 600; }
+a.link { color: var(--accent); text-decoration: none; }
+a.link:hover { text-decoration: underline; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+footer span { color: var(--accent); }
+
+/* ── GLOW ORBS ── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+}
+.orb-1 { width: 400px; height: 400px; background: var(--accent); top: -100px; right: -100px; }
+.orb-2 { width: 300px; height: 300px; background: var(--accent2); bottom: 100px; left: -80px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .hero { grid-template-columns: 1fr; }
+  .stat-card { display: none; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .bottom-grid { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; gap: 4px; }
+}
+
+@media (max-width: 500px) {
+  .skills-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="wrap">
+
+<!-- NAV -->
+<header>
+  <div class="brand">
+    <div class="avatar">
+      <img src="kit.jpeg" alt="Arun S">
+    </div>
+    <div>
+      <div class="brand-name">Arun S</div>
+      <div class="brand-role">Python · AI · Game Development</div>
+    </div>
+  </div>
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Available for opportunities</div>
+    <h1>Building AI &amp;<br><span class="dim">Game Systems</span></h1>
+    <p class="lead">
+      Computer science student passionate about AI-driven systems and game development.
+      I build neural networks with PyTorch, experiment with C++ and C#, and aim to develop
+      large-scale intelligent MMORPGs — with a research path toward Japan.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://github.com/Satoshi-0-0" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-row">
+      <div class="stat-label">Location</div>
+      <div class="stat-val">Chennai, India</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-row">
+      <div class="stat-label">Languages</div>
+      <div class="stat-val">English · Tamil · Japanese (Learning)</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-row">
+      <div class="stat-label">Education</div>
+      <div class="stat-val">B.Sc Computer Science<br><span style="color:var(--muted);font-size:12px;font-weight:400">Dr. MGR Educational &amp; Research Institute · 2027</span></div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-row">
+      <div class="stat-label">Goal</div>
+      <div class="stat-val">Masters in Japan · 2028 🎌</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<div class="section-header" id="projects">
+  <span class="section-tag">Work</span>
+  <h2 class="section-title">Projects</h2>
+</div>
+
+<div class="projects-grid">
+
+  <!-- ChurnPredictor — FEATURED -->
+  <div class="project-card featured">
+    <div class="project-top">
+      <div class="project-title">ChurnPredictor 🎮</div>
+      <span class="project-badge">AI · Latest</span>
+    </div>
+    <p class="project-desc">
+      Deep learning model that predicts player engagement and churn risk in online games.
+      Trained on real player behavioral data — sessions, playtime, purchases, difficulty — 
+      and classifies engagement as Low, Medium, or High.
+    </p>
+    <div class="project-stat">84.68% accuracy · 40,034 players</div>
+    <div class="project-tags">
+      <span class="tag">PyTorch</span>
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">Scikit-learn</span>
+      <span class="tag">Neural Network</span>
+    </div>
+    <a href="https://github.com/Satoshi-0-0/ChurnPredictor" target="_blank" class="project-link">View on GitHub →</a>
+  </div>
+
+  <!-- SafeGuard IoT -->
+  <div class="project-card">
+    <div class="project-top">
+      <div class="project-title">SafeGuard Pro IoT 🔒</div>
+      <span class="project-badge purple">IoT · Systems</span>
+    </div>
+    <p class="project-desc">
+      IoT-based security system developed as a proof-of-concept during academic evaluation.
+      Detects intrusion and triggers alerts using sensors and a microcontroller — 
+      designed for real-time event response.
+    </p>
+    <div class="project-tags">
+      <span class="tag">IoT</span>
+      <span class="tag">Microcontroller</span>
+      <span class="tag">Sensors</span>
+      <span class="tag">Security Systems</span>
+    </div>
+    <a href="https://github.com/Satoshi-0-0/safeguard-pro-iot" target="_blank" class="project-link">View on GitHub →</a>
+  </div>
+
+ </div>
+
+<!-- SKILLS -->
+<div class="section-header" id="skills">
+  <span class="section-tag">Toolkit</span>
+  <h2 class="section-title">Skills</h2>
+</div>
+
+<div class="skills-grid">
+  <div class="skill-group">
+    <div class="skill-group-title">AI & Data</div>
+    <div class="pills">
+      <span class="pill accent-pill">PyTorch</span>
+      <span class="pill accent-pill">Neural Networks</span>
+      <span class="pill">Pandas</span>
+      <span class="pill">Scikit-learn</span>
+      <span class="pill">NumPy</span>
+    </div>
+  </div>
+  <div class="skill-group">
+    <div class="skill-group-title">Languages</div>
+    <div class="pills">
+      <span class="pill accent-pill">Python</span>
+      <span class="pill">C++</span>
+      <span class="pill">C#</span>
+      <span class="pill">Java</span>
+      <span class="pill">HTML/CSS</span>
+    </div>
+  </div>
+  <div class="skill-group">
+    <div class="skill-group-title">Tools & Platforms</div>
+    <div class="pills">
+      <span class="pill">Git</span>
+      <span class="pill">GitHub</span>
+      <span class="pill">VS Code</span>
+      <span class="pill">Unity (Learning)</span>
+      <span class="pill">Flask</span>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section-header" id="experience">
+  <span class="section-tag">Journey</span>
+  <h2 class="section-title">Experience</h2>
+</div>
+
+<div class="card">
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-when">2025 – Present</div>
+      <div>
+        <div class="exp-title">Python Development Intern</div>
+        <div class="exp-desc">Building automation scripts, backend tools, and data-processing utilities. Developing practical experience with real codebases and collaborative workflows.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-when">2025</div>
+      <div>
+        <div class="exp-title">AI Project — ChurnPredictor</div>
+        <div class="exp-desc">Built a complete deep learning pipeline from scratch using PyTorch — preprocessing 40,034 player records, designing a neural network architecture, training with gradient descent, and achieving 84.68% test accuracy.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-when">2024 – 2025</div>
+      <div>
+        <div class="exp-title">Academic Project — SafeGuard Pro IoT</div>
+        <div class="exp-desc">Designed and implemented an IoT-based intrusion detection system using sensors and microcontrollers as a proof-of-concept academic project.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-when">2023 – 2024</div>
+      <div>
+        <div class="exp-title">Self-directed Learning</div>
+        <div class="exp-desc">Independent study in backend development, algorithms, C# game systems, and early game development experiments with Unity.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT + CONTACT -->
+<div class="bottom-grid" id="contact">
+  <div class="card">
+    <h3>About Me</h3>
+    <p class="about-text">
+      I'm a CS student who builds things at the intersection of AI and game development.
+      Right now I'm focused on machine learning with PyTorch, backend systems in Python,
+      and game logic with C# and C++. Long-term, I'm working toward a Master's degree
+      in Japan researching AI-driven NPC behavior and adaptive quest systems for MMORPGs.
+      Currently studying Japanese and building my portfolio one project at a time.
+    </p>
+  </div>
+  <div class="card">
+    <h3>Get in Touch</h3>
+    <div class="contact-row">
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <div class="contact-val">arun.satoshi0.0@example.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">GitHub</div>
+        <div class="contact-val"><a class="link" href="https://github.com/Satoshi-0-0" target="_blank">github.com/Satoshi-0-0 ↗</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-val"><a class="link" href="https://linkedin.com/in/arun-s-42870b27" target="_blank">linkedin.com/in/arun-s ↗</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Status</div>
+        <div class="contact-val" style="color:var(--accent)">● Open to opportunities</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Designed &amp; built by <span>Arun S (Satoshi)</span> · Made with <span>Ai-chan</span> 🤍</p>
+  <p style="margin-top:6px;font-size:11px">Python · PyTorch · Ambition</p>
+</footer>
+
+</div>
+</body>
+</html>
